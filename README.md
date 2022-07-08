@@ -1,4 +1,4 @@
-# Qvik’s Backend Assignment
+# This is my Milky Galaxy, a sample news application that uses different technologies. 
 This is a Django-based web service that provides several RESTFul APIs for creating, deleting and getting channels and articles as well as doing registration and login. 
 
 ## Installation
