@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  web: 
+    build: .
+    command:  bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/usr/src/qvikapp/
+    ports:
+      - 8000:8000
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+  celery:
+    build: .
+    command: celery -A news worker --loglevel=debug --concurrency=4
+    volumes:
+      - .:/usr/src/qvikapp/
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - web
+      - redis
